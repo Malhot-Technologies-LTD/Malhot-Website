@@ -1,0 +1,270 @@
+@import "tailwindcss";
+
+/* ==========================================================================
+   MALHOT DESIGN SYSTEM
+   Environment: deep navy / near-black. Accent: MALHOT blue. Ink: white.
+   ========================================================================== */
+
+@theme {
+  /* --- Surfaces --- */
+  --color-void: #02050c;
+  --color-ink: #04070f;
+  --color-navy-950: #050a16;
+  --color-navy-900: #070d1d;
+  --color-navy-850: #091226;
+  --color-navy-800: #0b1630;
+  --color-navy-700: #10213f;
+  --color-navy-600: #172d53;
+
+  /* --- MALHOT blue --- */
+  --color-brand-50: #eaf2ff;
+  --color-brand-100: #d2e3ff;
+  --color-brand-200: #a8c8ff;
+  --color-brand-300: #78a7ff;
+  --color-brand-400: #4b88ff;
+  --color-brand-500: #2b6cff;
+  --color-brand-600: #1652e6;
+  --color-brand-700: #0f3db4;
+  --color-brand-800: #0b2d85;
+  --color-brand-900: #081f5c;
+
+  /* --- Typography --- */
+  --font-display: var(--font-sora), "Sora", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-inter), "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: ui-monospace, "SFMono-Regular", "JetBrains Mono", monospace;
+
+  /* --- Radii --- */
+  --radius-xs: 6px;
+  --radius-sm: 10px;
+  --radius-md: 14px;
+  --radius-lg: 20px;
+  --radius-xl: 28px;
+  --radius-2xl: 36px;
+
+  /* --- Motion --- */
+  --ease-swift: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-cinematic: cubic-bezier(0.65, 0, 0.35, 1);
+  --ease-out-soft: cubic-bezier(0.16, 1, 0.3, 1);
+
+  --animate-marquee: marquee 38s linear infinite;
+  --animate-float-slow: floaty 9s ease-in-out infinite;
+  --animate-pulse-glow: pulseGlow 4.5s ease-in-out infinite;
+  --animate-shimmer: shimmer 2.4s linear infinite;
+  --animate-aurora: aurora 18s ease-in-out infinite alternate;
+  --animate-scan: scan 3.6s ease-in-out infinite;
+}
+
+@keyframes marquee {
+  from { transform: translate3d(0, 0, 0); }
+  to { transform: translate3d(-50%, 0, 0); }
+}
+@keyframes floaty {
+  0%, 100% { transform: translate3d(0, 0, 0); }
+  50% { transform: translate3d(0, -14px, 0); }
+}
+@keyframes pulseGlow {
+  0%, 100% { opacity: 0.35; transform: scale(1); }
+  50% { opacity: 0.7; transform: scale(1.06); }
+}
+@keyframes shimmer {
+  from { transform: translateX(-120%); }
+  to { transform: translateX(220%); }
+}
+@keyframes aurora {
+  0% { transform: translate3d(-4%, -2%, 0) scale(1); }
+  100% { transform: translate3d(5%, 4%, 0) scale(1.15); }
+}
+@keyframes scan {
+  0%, 100% { transform: translateY(-120%); opacity: 0; }
+  40% { opacity: 1; }
+  60% { opacity: 1; }
+  100% { transform: translateY(240%); }
+}
+@keyframes spinSlow {
+  to { transform: rotate(360deg); }
+}
+
+/* ==========================================================================
+   BASE
+   ========================================================================== */
+
+:root {
+  color-scheme: dark;
+  --shell-x: clamp(1.25rem, 5vw, 5.5rem);
+}
+
+* {
+  border-color: rgb(255 255 255 / 0.08);
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background-color: var(--color-ink);
+  color: #eef3ff;
+  font-family: var(--font-sans);
+  font-feature-settings: "ss01", "cv01";
+  -webkit-font-smoothing: antialiased;
+  overflow-x: clip;
+}
+
+::selection {
+  background: color-mix(in srgb, var(--color-brand-500) 60%, transparent);
+  color: #fff;
+}
+
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: #04070f; }
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, var(--color-brand-600), #0b2d85);
+  border-radius: 999px;
+  border: 2px solid #04070f;
+}
+::-webkit-scrollbar-thumb:hover { background: var(--color-brand-500); }
+
+:focus-visible {
+  outline: 2px solid var(--color-brand-400);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* Lenis */
+html.lenis, html.lenis body { height: auto; }
+.lenis.lenis-smooth { scroll-behavior: auto !important; }
+.lenis.lenis-stopped { overflow: hidden; }
+
+/* ==========================================================================
+   COMPONENT PRIMITIVES
+   ========================================================================== */
+
+@layer components {
+  .shell {
+    width: 100%;
+    max-width: 88rem;
+    margin-inline: auto;
+    padding-inline: var(--shell-x);
+  }
+
+  .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: rgb(168 200 255 / 0.9);
+  }
+
+  .display {
+    font-family: var(--font-display);
+    font-weight: 600;
+    letter-spacing: -0.035em;
+    line-height: 0.98;
+  }
+
+  .glass {
+    background: linear-gradient(160deg, rgb(255 255 255 / 0.07), rgb(255 255 255 / 0.015));
+    border: 1px solid rgb(255 255 255 / 0.1);
+    backdrop-filter: blur(18px) saturate(140%);
+    -webkit-backdrop-filter: blur(18px) saturate(140%);
+  }
+
+  .surface {
+    background:
+      radial-gradient(120% 140% at 0% 0%, rgb(43 108 255 / 0.12), transparent 55%),
+      linear-gradient(165deg, #0a1329 0%, #060b18 100%);
+    border: 1px solid rgb(255 255 255 / 0.07);
+  }
+
+  .hairline {
+    background-image: linear-gradient(90deg, transparent, rgb(120 167 255 / 0.35), transparent);
+    height: 1px;
+    width: 100%;
+  }
+
+  .grid-noise {
+    background-image:
+      linear-gradient(rgb(255 255 255 / 0.035) 1px, transparent 1px),
+      linear-gradient(90deg, rgb(255 255 255 / 0.035) 1px, transparent 1px);
+    background-size: 64px 64px;
+  }
+
+  .text-gradient {
+    background: linear-gradient(103deg, #ffffff 4%, #9ec3ff 46%, var(--color-brand-400) 92%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .brand-glow {
+    box-shadow:
+      0 0 0 1px rgb(43 108 255 / 0.35),
+      0 18px 50px -18px rgb(43 108 255 / 0.65);
+  }
+
+  .field {
+    width: 100%;
+    border-radius: var(--radius-md);
+    background: rgb(255 255 255 / 0.035);
+    border: 1px solid rgb(255 255 255 / 0.1);
+    padding: 0.95rem 1rem;
+    color: #eef3ff;
+    font-size: 0.95rem;
+    transition: border-color 0.35s var(--ease-swift), background 0.35s var(--ease-swift), box-shadow 0.35s var(--ease-swift);
+  }
+  .field::placeholder { color: rgb(198 214 244 / 0.34); }
+  .field:hover { border-color: rgb(255 255 255 / 0.18); }
+  .field:focus {
+    outline: none;
+    background: rgb(43 108 255 / 0.08);
+    border-color: color-mix(in srgb, var(--color-brand-400) 70%, transparent);
+    box-shadow: 0 0 0 4px rgb(43 108 255 / 0.14);
+  }
+  .field[aria-invalid="true"] {
+    border-color: rgb(255 120 120 / 0.65);
+    box-shadow: 0 0 0 4px rgb(255 90 90 / 0.12);
+  }
+
+  .skeleton {
+    position: relative;
+    overflow: hidden;
+    background: rgb(255 255 255 / 0.05);
+  }
+  .skeleton::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, transparent, rgb(120 167 255 / 0.18), transparent);
+    animation: var(--animate-shimmer);
+  }
+}
+
+@utility mask-fade-b {
+  mask-image: linear-gradient(to bottom, #000 55%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to bottom, #000 55%, transparent 100%);
+}
+
+@utility mask-fade-x {
+  mask-image: linear-gradient(to right, transparent, #000 12%, #000 88%, transparent);
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 12%, #000 88%, transparent);
+}
+
+@utility spin-slow {
+  animation: spinSlow 26s linear infinite;
+}
+
+/* ==========================================================================
+   ACCESSIBILITY
+   ========================================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
